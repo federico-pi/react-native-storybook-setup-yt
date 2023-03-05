@@ -1,4 +1,4 @@
-import { format, minutesToMilliseconds, secondsToMilliseconds } from 'date-fns';
+import { format, secondsToMilliseconds } from 'date-fns';
 import { useEffect, useState } from 'react';
 import {
   Button,
@@ -10,12 +10,12 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useCurrentCryptoData } from '../api/current-crypto-data';
-import { CurrencyObject, CurrencyCode } from '../types/current-crypto-data';
+import { CurrencyCode } from '../types/current-crypto-data';
 import { Currency } from './Currency';
 import { Option } from './Option';
 import { keys } from 'lodash';
 import { assets } from '../assets';
-import { LinearGradient } from 'expo-linear-gradient';
+import { AnimatedGradient } from './AnimatedGradient';
 
 const STALE_TIME_IN_SECONDS = 60;
 
@@ -48,13 +48,7 @@ export function Table() {
   }, [isError]);
 
   return (
-    <LinearGradient
-      style={styles.container}
-      colors={['#ea4492', '#ff9cda', '#428cd4', '#004e9a', '#041b2d']}
-      start={{ x: 0, y: 1 }}
-      end={{ x: 0.4, y: 0.3 }}
-      locations={[0, 0.2, 0.4, 0.6, 0.8]}
-    >
+    <AnimatedGradient containerStyle={styles.container}>
       <View style={styles.info}>
         <View style={styles.titleWrapper}>
           <Image source={assets.bitcoin} style={styles.icon} />
@@ -100,7 +94,7 @@ export function Table() {
         )}
       </View>
       <Text style={styles.disclaimer}>{cryptoData?.disclaimer}</Text>
-    </LinearGradient>
+    </AnimatedGradient>
   );
 }
 
