@@ -10,12 +10,12 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useCurrentCryptoData } from '../api/current-crypto-data';
-import { CurrencyCode } from '../types/current-crypto-data';
+import { CurrencyCode } from '../types/crypto-data';
 import { Currency } from './Currency';
-import { Option } from './Option';
 import { keys } from 'lodash';
 import { assets } from '../assets';
-import { AnimatedGradient } from './AnimatedGradient';
+import { Gradient } from './Gradient';
+import { Price } from './Price';
 
 const STALE_TIME_IN_SECONDS = 60;
 
@@ -48,7 +48,7 @@ export function Table() {
   }, [isError]);
 
   return (
-    <AnimatedGradient containerStyle={styles.container}>
+    <Gradient containerStyle={styles.container}>
       <View style={styles.info}>
         <View style={styles.titleWrapper}>
           <Image source={assets.bitcoin} style={styles.icon} />
@@ -67,9 +67,9 @@ export function Table() {
       </View>
       <View style={styles.options}>
         {keys(cryptoData?.bpi).map((code) => (
-          <Option
+          <Currency
             key={code}
-            option={code as CurrencyCode}
+            currency={code as CurrencyCode}
             selected={code === selectedCurrency}
             onPress={(currency: CurrencyCode) => setSelectedCurrency(currency)}
           />
@@ -77,15 +77,13 @@ export function Table() {
       </View>
       <View style={styles.wrapper}>
         {isLoading && <ActivityIndicator />}
-        {!isLoading && (
-          <Currency currency={cryptoData?.bpi[selectedCurrency]} />
-        )}
+        {!isLoading && <Price currency={cryptoData?.bpi[selectedCurrency]} />}
       </View>
       <View style={styles.wrapper}>
         {!counter && !isLoading && !isError && (
           <Button
             color={'#7DCFFF'}
-            title="Update"
+            title="Refresh prices"
             onPress={() => {
               setCounter(STALE_TIME_IN_SECONDS);
               refetch();
@@ -94,7 +92,7 @@ export function Table() {
         )}
       </View>
       <Text style={styles.disclaimer}>{cryptoData?.disclaimer}</Text>
-    </AnimatedGradient>
+    </Gradient>
   );
 }
 
@@ -110,7 +108,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 48,
+    marginBottom: 64,
   },
   options: {
     width: '100%',

@@ -5,12 +5,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 const START = { x: -0.2, y: 1.2 };
 const END = { x: 1.2, y: -0.2 };
 const COLORS = [
-  '#fdf4c9',
-  '#fbcdf2',
-  '#e8befa',
-  '#bbf3bf',
-  '#fdf4c9',
-  '#fbcdf2',
+  '#04040c',
+  '#111',
+  '#111',
+  '#081838',
+  '#04040c',
+  '#111',
 ];
 const LOCATIONS = [0, 0.2, 0.4, 0.6, 0.8, 1];
 const MOVEMENT = LOCATIONS[1] / 20;
@@ -21,7 +21,7 @@ interface AnimatedGradientProps {
   children: ReactNode;
 }
 
-export function AnimatedGradient({
+export function Gradient({
   containerStyle,
   children,
 }: AnimatedGradientProps) {

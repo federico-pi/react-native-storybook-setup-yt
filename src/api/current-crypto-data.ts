@@ -1,6 +1,6 @@
 import { useQuery, UseQueryOptions, UseQueryResult } from 'react-query';
 import axios from 'axios';
-import { CurrentCryptoData } from '../types/current-crypto-data';
+import { CurrentCryptoData } from '../types/crypto-data';
 
 const getCurrentCryptoData = async () => {
   try {

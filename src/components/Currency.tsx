@@ -1,34 +1,42 @@
-import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Bpi, CurrencyCode, CurrencyObject } from '../types/crypto-data';
 
-import { CurrencyObject } from '../types/current-crypto-data';
-
-interface CurrencyProps {
-  currency: CurrencyObject | undefined;
+interface OptionProps {
+  currency: CurrencyCode;
+  selected: boolean;
+  onPress: (currency: CurrencyCode) => void;
 }
 
-export function Currency({ currency }: CurrencyProps) {
+export function Currency({ currency, selected, onPress }: OptionProps) {
   if (!currency) {
     return null;
   }
 
   return (
-    <Text style={styles.text}>
-      {currencySymbolMap[currency.symbol]}
-      {parseFloat((currency.rate_float || 0).toFixed(2)).toLocaleString()}
-    </Text>
+    <TouchableOpacity
+      style={[styles.container, selected && styles.highlight]}
+      onPress={() => onPress(currency)}
+    >
+      <Text style={styles.text}>{currency}</Text>
+    </TouchableOpacity>
   );
 }
 
-const currencySymbolMap = {
-  '&euro;': '€',
-  '&pound;': '£',
-  '&#36;': '$',
-};
-
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderColor: 'white',
+    borderRadius: 16,
+    backgroundColor: '#777',
+    marginHorizontal: 7,
+    opacity: 0.35
+  },
+  highlight: {
+    opacity: 0.85,
+  },
   text: {
-    fontSize: 34,
-    color: '#fefefe'
+    fontSize: 18,
+    color: '#fefefe',
   },
 });
