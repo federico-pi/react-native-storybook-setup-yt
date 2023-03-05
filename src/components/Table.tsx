@@ -65,31 +65,35 @@ export function Table() {
           </Text>
         </View>
       </View>
-      <View style={styles.options}>
-        {keys(cryptoData?.bpi).map((code) => (
-          <Currency
-            key={code}
-            currency={code as CurrencyCode}
-            selected={code === selectedCurrency}
-            onPress={(currency: CurrencyCode) => setSelectedCurrency(currency)}
-          />
-        ))}
-      </View>
       <View style={styles.wrapper}>
-        {isLoading && <ActivityIndicator />}
-        {!isLoading && <Price currency={cryptoData?.bpi[selectedCurrency]} />}
-      </View>
-      <View style={styles.wrapper}>
-        {!counter && !isLoading && !isError && (
-          <Button
-            color={'#7DCFFF'}
-            title="Refresh prices"
-            onPress={() => {
-              setCounter(STALE_TIME_IN_SECONDS);
-              refetch();
-            }}
-          />
-        )}
+        <View style={styles.options}>
+          {keys(cryptoData?.bpi).map((code) => (
+            <Currency
+              key={code}
+              currency={code as CurrencyCode}
+              selected={code === selectedCurrency}
+              onPress={(currency: CurrencyCode) =>
+                setSelectedCurrency(currency)
+              }
+            />
+          ))}
+        </View>
+        <View style={styles.placeholder}>
+          {isLoading && <ActivityIndicator />}
+          {!isLoading && <Price currency={cryptoData?.bpi[selectedCurrency]} />}
+        </View>
+        <View style={styles.placeholder}>
+          {!counter && !isLoading && !isError && (
+            <Button
+              color={'#7DCFFF'}
+              title="Refresh prices"
+              onPress={() => {
+                setCounter(STALE_TIME_IN_SECONDS);
+                refetch();
+              }}
+            />
+          )}
+        </View>
       </View>
       <Text style={styles.disclaimer}>{cryptoData?.disclaimer}</Text>
     </Gradient>
@@ -101,20 +105,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'transparent',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 32,
+    justifyContent: 'space-between',
+    paddingTop: 86,
+    paddingBottom: 48,
+    paddingHorizontal: 32,
   },
   info: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 64,
-  },
-  options: {
-    width: '100%',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    marginBottom: 24,
   },
   titleWrapper: {
     flexDirection: 'row',
@@ -140,13 +140,25 @@ const styles = StyleSheet.create({
     color: '#fefefe',
   },
   wrapper: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  options: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 36,
+  },
+  placeholder: {
     width: '100%',
     height: 48,
     alignItems: 'center',
     justifyContent: 'center',
   },
   disclaimer: {
-    marginTop: 16,
     fontSize: 11,
     color: '#fefefe',
   },

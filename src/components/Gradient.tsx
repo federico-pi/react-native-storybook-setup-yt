@@ -21,6 +21,10 @@ interface AnimatedGradientProps {
   children: ReactNode;
 }
 
+/** 
+ * @credit Chelsea @ MissCoding
+ * https://www.youtube.com/watch?v=xLQ7a3lNwCo
+ */
 export function Gradient({
   containerStyle,
   children,

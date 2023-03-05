@@ -29,7 +29,7 @@ export function Price({ currency }: CurrencyProps) {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 34,
-    color: '#fefefe',
+    fontSize: 36,
+    color: 'white',
   },
 });
