@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-import { CurrencyObject } from '../types/crypto-data';
-import { numberWithCommas } from '../utils/format';
+import { CurrencyObject } from '../../types/crypto-data';
+import { numberWithCommas } from '../../utils/number-with-commas';
+import { styles } from './style';
 
 const currencySymbolMap = {
   '&euro;': '€',
@@ -26,10 +27,3 @@ export function Price({ currency }: CurrencyProps) {
     </Text>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 36,
-    color: 'white',
-  },
-});

@@ -2,20 +2,22 @@ import { format, secondsToMilliseconds } from 'date-fns';
 import { useEffect, useState } from 'react';
 import {
   Button,
-  StyleSheet,
   Text,
   View,
   Image,
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import { useCurrentCryptoData } from '../api/current-crypto-data';
-import { CurrencyCode } from '../types/crypto-data';
-import { Currency } from './Currency';
 import { keys } from 'lodash';
-import { assets } from '../assets';
-import { Gradient } from './Gradient';
-import { Price } from './Price';
+
+import { useCurrentCryptoData } from '../../api/crypto-data';
+import { assets } from '../../assets';
+import { CurrencyCode } from '../../types/crypto-data';
+import { Currency } from '../Currency/Currency';
+import { Gradient } from '../Gradient/Gradient';
+import { Price } from '../Price/Price';
+
+import { styles } from './styles';
 
 const STALE_TIME_IN_SECONDS = 60;
 
@@ -99,67 +101,3 @@ export function Table() {
     </Gradient>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingTop: 86,
-    paddingBottom: 48,
-    paddingHorizontal: 32,
-  },
-  info: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 64,
-  },
-  titleWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  icon: {
-    width: 26,
-    height: 26,
-    marginRight: 8,
-  },
-  title: {
-    fontSize: 24,
-    color: '#fefefe',
-  },
-  date: {
-    textAlign: 'right',
-    fontSize: 16,
-    color: '#fefefe',
-  },
-  time: {
-    textAlign: 'right',
-    fontSize: 13,
-    color: '#fefefe',
-  },
-  wrapper: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  options: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginBottom: 36,
-  },
-  placeholder: {
-    width: '100%',
-    height: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  disclaimer: {
-    fontSize: 11,
-    color: '#fefefe',
-  },
-});

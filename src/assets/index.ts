@@ -1,3 +1,3 @@
 export const assets = {
-  bitcoin: require('./bitcoin-emblem.png'),
+  bitcoin: require('./icons/bitcoin-emblem.png'),
 };
